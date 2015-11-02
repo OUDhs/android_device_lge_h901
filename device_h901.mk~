@@ -14,11 +14,25 @@ else
 	LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 endif
 
+# Qualcomm Configs
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/msm_irqbalance.conf:system/vendor/etc/msm_irqbalance.conf \
+    $(LOCAL_PATH)/configs/perf-profile0.conf:system/vendor/etc/perf-profile0.conf
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_KERNEL):kernel
 
 PRODUCT_PACKAGES += \
-    fstab.qcom 
+    fstab.qcom \
+    ueventd.qcom.rc
+
+# Display
+PRODUCT_PACKAGES += \
+    copybit.msm8992 \
+    gralloc.msm8992 \
+    hwcomposer.msm8992 \
+    memtrack.msm8992 \
+    liboverlay
 
 $(call inherit-product, build/target/product/full.mk)
 
